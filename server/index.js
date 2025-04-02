@@ -46,32 +46,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(function (req, res, next) {
-	res.header('Access-Control-Allow-Origin', 'https://pokedex-salesp07.netlify.app');
-	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-	next();
-});
-
-const whitelist = [
-	'http://localhost:3000',
-	'https://tu-nuevo-proyecto.netlify.app', // Mi URL de Netlify
-];
+// Configuración de CORS
+const whitelist = ['http://localhost:3000', 'https://pokedexappweb.netlify.app'];
 app.use(
 	cors({
 		origin: (origin, callback) => {
-			// Permitir solicitudes sin origen (como Postman) o si el origen está en la whitelist
 			if (!origin || whitelist.includes(origin)) {
 				callback(null, true);
 			} else {
 				callback(new Error('Not allowed by CORS'));
 			}
 		},
-		credentials: true, // Necesario para enviar cookies/sesiones
+		credentials: true,
 		methods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
 		allowedHeaders: ['Content-Type', 'Authorization'],
 	}),
 );
 
+// Configuración de sesiones
 app.use(
 	session({
 		name: 'sessionID',
@@ -79,10 +71,10 @@ app.use(
 		resave: false,
 		saveUninitialized: false,
 		cookie: {
-			maxAge: 600000, // 10 minutos
+			maxAge: 600000,
 			httpOnly: true,
-			secure: process.env.NODE_ENV === 'production', // true en producción
-			sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // 'none' para cross-site
+			secure: process.env.NODE_ENV === 'production',
+			sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
 		},
 		store: store,
 	}),
@@ -111,7 +103,6 @@ async function logRequest(req, res, next) {
 }
 
 // Error handler
-
 async function handleErr(err, req, res, next) {
 	if (err.name === 'MongoServerError' || err.name === 'MongoError') {
 		err = new DatabaseError(err.message);
@@ -127,6 +118,9 @@ async function handleErr(err, req, res, next) {
 }
 
 // Routes
+app.get('/', (req, res) => {
+	res.json({ message: 'Pokédex API is running' });
+});
 
 app.get('/logout', (req, res) => {
 	req.session.destroy();
@@ -179,11 +173,11 @@ app.post('/login', async (req, res) => {
 });
 
 app.get('/getSessionInfo', (req, res) => {
-	console.log('Session data:', req.session); // Para depuración
+	console.log('Session data:', req.session);
 	res.json({
 		isLoggedIn: req.session.isLoggedIn || false,
 		isAdmin: req.session.user?.isAdmin || false,
-		username: req.session.user?.username || 'Guest', // Incluimos el username
+		username: req.session.user?.username || 'Guest',
 	});
 });
 
@@ -214,7 +208,6 @@ app.get('/uniqueUsers/:currentHour', isLoggedIn, isAdmin, async (req, res) => {
 	let currentHour = Number(req.params.currentHour);
 	let hoursArray = [];
 
-	// Generate the first array
 	for (let i = 5; i >= 0; i--) {
 		let hour = currentHour - i;
 		if (hour < 0) hour += 24;
@@ -254,7 +247,6 @@ app.get('/uniqueUsers/:currentHour', isLoggedIn, isAdmin, async (req, res) => {
 		},
 	]);
 
-	// Merge the two arrays with priority given to mongoose aggregate array
 	let resultArray = hoursArray.reduce((acc, curr) => {
 		let matchingObj = query.find((obj) => obj._id === curr._id);
 		if (matchingObj) newItem = matchingObj;
@@ -308,7 +300,7 @@ app.use(handleErr);
 
 connectDB()
 	.then(() => {
-		const server = app.listen(process.env.PORT, '127.0.0.1', () => {
+		const server = app.listen(process.env.PORT, '0.0.0.0', () => {
 			console.log('Server started on port ' + process.env.PORT);
 		});
 		server.on('error', (err) => {
