@@ -52,7 +52,10 @@ app.use(function (req, res, next) {
 	next();
 });
 
-const whitelist = ['http://localhost:3000'];
+const whitelist = [
+	'http://localhost:3000',
+	'https://tu-nuevo-proyecto.netlify.app', // Mi URL de Netlify
+];
 app.use(
 	cors({
 		origin: (origin, callback) => {
