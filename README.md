@@ -2,7 +2,7 @@
 
 Proyecto desarrollado en **React** que permite a los usuarios explorar y gestionar su propia Pokédex. Incluye autenticación de usuarios, búsqueda y filtrado de Pokémon, gestión de favoritos, y un panel de administración para usuarios con permisos especiales.
 
-![Página de Pokémons](img-readme.png)
+![Página de Pokémons](react-app/public/img-readme.png)
 
 ## Características principales 🌟
 
