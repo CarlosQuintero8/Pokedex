@@ -1,0 +1,14 @@
+#container {
+	padding: 0 7vw 0 7vw;
+	text-align: center;
+}
+.danceBtn {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+}
+#favoritesBtn {
+	font-weight: bold;
+}

@@ -1,0 +1,91 @@
+/* src/pages/Auth/style.css */
+
+/* Auth pages */
+.authContainer {
+	text-align: center;
+	width: 400px;
+	background: rgba(0, 0, 0, 0.5);
+	padding: 40px;
+	border-radius: 20px;
+	border: 2px solid #ffffff;
+	color: white;
+	@apply shadow-lg; /* Agregamos sombra con Tailwind */
+}
+
+.authContainer a {
+	@apply text-yellow-500 hover:text-blue-300; /* Color azul claro para el enlace */
+}
+
+.authPage {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(to right, #ff4040, #a940a9);
+}
+
+.authInput {
+	@apply w-full p-2 my-2 border rounded text-black; /* Estilos con Tailwind */
+}
+
+.authBtn {
+	@apply font-bold rounded-none text-lg w-full bg-green-600 text-white py-2 hover:bg-green-700; /* Estilos con Tailwind */
+}
+
+.authErrMsg {
+	color: red;
+	text-align: center;
+	margin-top: -15px;
+	margin-bottom: 15px;
+}
+
+.authLogoContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	margin-bottom: 20px;
+	gap: 20px;
+	overflow: visible;
+	height: auto;
+}
+
+.authLogo {
+	font-family: 'Pokemon-Solid';
+	font-size: 60px;
+	line-height: 1.5; /* Aumenta la altura de línea */
+	display: inline-block; /* Asegura que el texto tenga espacio */
+	padding-bottom: 5px; /* Agrega espacio extra en la parte inferior */
+}
+
+.authLogoImg {
+	width: auto;
+	height: 120px;
+}
+
+@media (max-width: 600px) {
+	.authContainer {
+		width: 95vw;
+		padding: 40px 15px;
+	}
+
+	.authTitle {
+		font-size: 30px;
+		padding-bottom: 10px;
+	}
+	p {
+		font-size: 14px;
+	}
+
+	.authLogo {
+		font-size: 45px;
+	}
+	.authLogoImg {
+		height: 80px;
+	}
+	.authLogoContainer {
+		gap: 10px;
+	}
+}

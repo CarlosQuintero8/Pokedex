@@ -1,0 +1,71 @@
+.navbar-brand {
+	padding: 0;
+}
+.title {
+	font-family: 'Pokemon-Solid';
+	font-size: 40px;
+	margin-left: 10px;
+	padding-bottom: 10px;
+}
+#navLogoContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	/* margin-bottom: 20px; */
+	/* gap: 20px; */
+}
+
+#logoImg {
+	width: auto;
+	height: 70px;
+}
+
+.myNav {
+	padding-left: 5vw;
+	padding-right: 5vw;
+	background: linear-gradient(to right, #ff4040, #a940a9);
+	color: #fff;
+}
+
+.nav-link {
+	font-size: 20px;
+	/* font-weight: bold;  */
+	color: white;
+}
+
+@media (max-width: 600px) {
+	.title {
+		display: none;
+	}
+	.gifContainer {
+		column-gap: 0;
+	}
+	#pikaGif {
+		margin-left: -12vw;
+	}
+}
+
+.offcanvas {
+	color: white;
+	background: rgba(91, 175, 213, 1);
+	text-align: center;
+}
+
+.offcanvas-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	padding: 1rem 1rem;
+	color: white !important;
+}
+
+.gifContainer {
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: center;
+	right: 1vw;
+	top: 0px;
+}

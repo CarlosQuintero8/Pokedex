@@ -1,0 +1,15 @@
+#checkboxes {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-bottom: 25px;
+	justify-content: center;
+}
+
+.checkbox {
+	padding: 1vh 1vw;
+	width: 120px; /* Ajusta el ancho según sea necesario */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
